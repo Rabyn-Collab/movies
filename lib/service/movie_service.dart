@@ -12,10 +12,9 @@ class MovieService {
 
 static final dio = Dio();
 
- static Future<List<Movie>> getPopularMovieData() async{
+ static Future<List<Movie>> getPopularMovieData({required String apiPath}) async{
       try{
-        final response = await dio.get(
-          'https://api.themoviedb.org/3/movie/popular',
+        final response = await dio.get(apiPath,
          options: Options(
             headers: credential
          )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverspods/providers/movie_provider.dart';
 import 'package:riverspods/view/widgets/tab_bar_widgets.dart';
 
 
@@ -42,9 +43,9 @@ class HomePage extends StatelessWidget {
           body: TabBarView(
               physics: NeverScrollableScrollPhysics(),
               children: [
-              TabBarWidgets(),
-              Text('hello world2'),
-              Text('hello world3'),
+              TabBarWidgets(getMovie: moviePopular, pageKey: 'p'),
+              TabBarWidgets(getMovie: topRated, pageKey: 't'),
+              TabBarWidgets(getMovie: upComing, pageKey: 'u'),
           ]
           )
       ),
