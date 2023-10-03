@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:riverspods/models/movie.dart';
-import 'package:riverspods/providers/movie_provider.dart';
+
+import 'package:riverspods/view/video_page.dart';
 
 
 
 
 class TabBarWidgets extends StatelessWidget {
-  final FutureProvider  getMovie;
+  final FutureProvider<List<Movie>>  getMovie;
   final String pageKey;
   const TabBarWidgets({super.key, required this.getMovie, required this.pageKey});
 
@@ -16,6 +18,7 @@ class TabBarWidgets extends StatelessWidget {
     return Consumer(
         builder: (context, ref, child) {
           final data = ref.watch(getMovie);
+
           return  data.when(
               data: (data){
                 return Padding(
@@ -31,7 +34,11 @@ class TabBarWidgets extends StatelessWidget {
                       ),
                       itemBuilder: (context, index){
 
-                        return Image.network(data[index].poster_path);
+                        return InkWell(
+                            onTap: (){
+                              Get.to(() => VideoPage(id: data[index].id));
+                            },
+                            child: Image.network(data[index].poster_path));
                       }
                   ),
                 );
